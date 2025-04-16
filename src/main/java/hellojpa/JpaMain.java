@@ -15,15 +15,12 @@ public class JpaMain {
         tx.begin();
 
         try{
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(10)
-                    .getResultList();
+            Member member = em.find(Member.class, 150L);
+            member.setName("zzzz");
 
-            for (Member member : result) {
-                System.out.println("member = " + member.getName());
-            }
+            em.detach(member);
 
+            System.out.println("=================");
             tx.commit();
         }catch (Exception e){
             tx.rollback();
