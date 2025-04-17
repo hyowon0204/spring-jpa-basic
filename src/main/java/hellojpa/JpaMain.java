@@ -1,8 +1,7 @@
 package hellojpa;
 
+import hellojpa.domain.Member;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 public class JpaMain {
 
@@ -10,17 +9,12 @@ public class JpaMain {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
         EntityManager em = emf.createEntityManager();
-        //code
+
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
         try{
-            Member member = em.find(Member.class, 150L);
-            member.setName("zzzz");
 
-            em.detach(member);
-
-            System.out.println("=================");
             tx.commit();
         }catch (Exception e){
             tx.rollback();
